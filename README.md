@@ -1,2 +1,2 @@
 # mcyt
-86 servers and counting. yay
+94 servers and counting. yay
