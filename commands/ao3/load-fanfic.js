@@ -70,7 +70,8 @@ exports.run = async (client, message, args, tools) => {
             .setPage(1)
             .setTimestamp()
             .build();
-    } catch {
+    } catch (err) {
+        console.log(err)
         return message.channel.send("Internal server error, please try again later.")
     }
 };

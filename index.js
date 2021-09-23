@@ -1,5 +1,4 @@
 const { BaseCluster } = require('kurasuta');
-
 module.exports = class extends BaseCluster {
     launch() {
         const Discord = require("discord.js"),
@@ -12,7 +11,15 @@ module.exports = class extends BaseCluster {
         var phin = require('phin')
         var app = express();
         var config = require('./config/config.json')
-        const Coins = require('./models/coins.js')
+        const Topgg = require("@top-gg/sdk");
+
+        const webhook = new Topgg.Webhook("discord");
+        const { DJSPoster } = require('topgg-autoposter')
+        const ap = new DJSPoster(process.env.topgg, client)
+
+        ap.on('posted', () => {
+            console.log('Posted stats to Top.gg!')
+        })
 
         let modules = [
             "ao3",
@@ -67,7 +74,9 @@ module.exports = class extends BaseCluster {
         });
 
         fs.writeFileSync(`./logs/${startTime}`, '');*/
-        //keepAlive();
+        //keepAlive();'
+
+
         this.client.login(process.env.token);
 
     }

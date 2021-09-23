@@ -9,7 +9,7 @@ function randomthing(array) {
 exports.run = async (client, message, args, tools) => {
     weeee = await message.channel.send("Awaiting response from AO3...")
     let embeds = [];
-    let kudos = await Axios.get("https://ao3api.williamvongphan.repl.co/search/?query=dreamnotfound")
+    let works = await Axios.get("https://ao3api.williamvongphan.repl.co/search/?query=dreamnotfound")
     let randomwork = randomthing(works.data.response).id
     let work = await Axios.get("https://ao3api.williamvongphan.repl.co/load?id=" + randomwork)
     if (work.data.restricted == "true") {

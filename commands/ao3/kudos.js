@@ -18,19 +18,22 @@ exports.run = async (client, message, args, tools) => {
         if (kudos.data.successful == false) {
             let response = new Discord.MessageEmbed()
             .setTitle("Kudos failed")
-            .setDescription("You have already left a kudos on " + work.data.title + ".")
+            .setDescription("You have already left a kudos on *" + work.data.title + "*.")
             .setColor("#FF0000")
             .setTimestamp()
+            message.channel.send(response)
         }    
         else {
             let response = new Discord.MessageEmbed()
             .setTitle("Kudos successful")
-            .setDescription("The work " + work.data.title + " now has **" + kudos.data.newkudos + "**, up **1** from **" + oldkudos + "**")
+            .setDescription("The work *" + work.data.title + "* now has **" + kudos.data.newkudos + "**, up **1** from **" + kudos.data.oldkudos + "**")
             .setColor("#FFFF00")
             .setTimestamp()
+            message.channel.send(response)
         }
     }
-    catch {
+    catch (err) {
+        console.log(err)
         return message.channel.send("Internal server error, please try again later")
     }
 };

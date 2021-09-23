@@ -8,7 +8,7 @@ function randomthing(array) {
 
 playerlist = ["Dream", "GeorgeNotFound"]
 exports.run = async (client, message, args, tools) => {
-    return message.channel.send("Hold on! We haven't finished this command yet!")
+    return message.channel.send("Hold on! We haven't finished this command yet! (currently training a neural network for this command)")
     let user = args[0]
     if (message.channel.nsfw) {
         if (!args[0]) { return message.channel.send("You can't rap against nobody, try again.") }

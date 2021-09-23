@@ -1,1 +1,4 @@
-{}
+{
+  "webhookurl": "https://mcyt.williamvongphan.repl.co/hook",
+  "auth": "MCYT"
+}

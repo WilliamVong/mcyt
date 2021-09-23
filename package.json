@@ -36,9 +36,11 @@
     "node-twitch": "^0.4.5",
     "os-utils": "0.0.14",
     "phin": "^3.6.0",
+    "request": "^2.88.2",
     "settings.json": "^0.2.0",
     "simple-youtube-api": "^5.2.1",
     "superagent": "^6.1.0",
+    "topgg-autoposter": "^2.0.0",
     "ytdl-core-discord": "^1.3.0"
   }
 }

@@ -18,7 +18,7 @@ exports.conf = {
     guildOnly: false,
     aliases: [],
     cooldown: 120,
-    perms: ["USE_EXTERNAL_EMOJIS", "ATTACH_FILES"],
+    perms: ["USE_EXTERNAL_EMOJIS", "ATTACH_FILES", "MANAGE_WEBHOOKS"],
 
     permLevel: 0
   };

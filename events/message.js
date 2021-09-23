@@ -15,6 +15,20 @@ module.exports = async message => {
     let guildSettings = await Settings.findOne({
         guildID: message.guild.id
     })
+    let userdata = await Settings.findOne({
+        userID: message.author.id
+    })
+    let haspremium = false
+    if (!userdata) {
+        haspremium = false
+    } else {
+        if (userdata.premiumUntil > Date.now()) {
+            haspremium = true
+        }
+        else {
+            haspremium = false
+        }
+    }
     if (message.content.includes("<@809175820340822056>")) {message.author.reply("My prefix is " + guildSettings.prefix)}
   let blacklist = JSON.parse(fs.readFileSync("./blacklist.json", "utf8"));
   if (!blacklist[message.author.id]) {
@@ -59,15 +73,18 @@ module.exports = async message => {
                 cooldowns.set(cmd.help.name, new Discord.Collection());
 
             const now = Date.now(),
-                timestamps = cooldowns.get(cmd.help.name),
-                cooldownAmount = cmd.conf.cooldown * 1000 || 0;
+                timestamps = cooldowns.get(cmd.help.name)
+                if (haspremium == true) {
+                    cooldownAmount = cmd.conf.premiumCooldown * 1000 || cmd.conf.cooldown * 1000 / 2 || 0
+                } else { 
+                cooldownAmount = cmd.conf.cooldown * 1000 || 0 }
             if (message.author.id != settings.ownerid) {
                 if (timestamps.has(message.author.id)) {
                     const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
 
                     if (now < expirationTime) {
                         const timeLeft = (expirationTime - now);
-                        return message.reply(`Please wait ${humanizeDuration(timeLeft)} before reusing the \`${command}\` command.`);
+                        return message.reply(`Please wait ${humanizeDuration(timeLeft)} before reusing the \`${command}\` command. The cooldown for this command is ${cmd.conf.cooldown} seconds, but premium users only have to wait for ${cmd.conf.premiumCooldown || cmd.conf.cooldown / 2} seconds`);
                     }
                 }
             }
@@ -109,8 +126,11 @@ fs.appendFileSync(`./logs/commandlog`, `[ ${(new Date).toString().split(" ").sli
                 cooldowns.set(cmd.help.name, new Discord.Collection());
 
             const now = Date.now(),
-                timestamps = cooldowns.get(cmd.help.name),
-                cooldownAmount = cmd.conf.cooldown * 1000 || 0;
+                timestamps = cooldowns.get(cmd.help.name)
+                if (haspremium == true) {
+                    cooldownAmount = cmd.conf.premiumCooldown * 1000 || cmd.conf.cooldown * 1000 / 2 || 0
+                } else { 
+                cooldownAmount = cmd.conf.cooldown * 1000 || 0 }
             if (message.author.id != settings.ownerid) {
 
                 if (timestamps.has(message.author.id)) {
@@ -118,7 +138,7 @@ fs.appendFileSync(`./logs/commandlog`, `[ ${(new Date).toString().split(" ").sli
 
                     if (now < expirationTime) {
                         const timeLeft = (expirationTime - now);
-                        return message.reply(`Please wait ${humanizeDuration(timeLeft)} before reusing the \`${command}\` command.`);
+                        return message.reply(`Please wait ${humanizeDuration(timeLeft)} before reusing the \`${command}\` command. The cooldown for this command is ${cmd.conf.cooldown} seconds, but premium users only have to wait for ${cmd.conf.premiumCooldown || cmd.conf.cooldown / 2} seconds.`);
                     }
                 }
             }

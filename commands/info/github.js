@@ -4,9 +4,8 @@ const superagent = require('superagent');
 exports.run = async (client, message, args, tools) => {
     let supportEmbed = new Discord.MessageEmbed()
           .setColor("#32EDF7")
-        .setTitle('Vote for me')
-        .setDescription(`Please vote! It supports me and in the future you will be able to access premium features and faster cooldowns!\n\n[Top.gg](https://top.gg/bot/850092444871819314/vote)\n[DBL.com](https://discordbotlist.com/bots/mcyt/upvote)\n`)
-        .setFooter("Thank you so much!")
+        .setTitle('Github repo')
+        .setDescription(`[Click here](https://github.com/WilliamVong/mcyt)`)
         .setTimestamp()
     message.channel.send(supportEmbed)
 };
@@ -22,7 +21,7 @@ exports.conf = {
 };
 
 exports.help = {
-    name: 'vote',
-    description: 'Gives you an vote link. Voting really helps me.',
-    usage: 'vote',
+    name: 'github',
+    description: 'Returns the link to the github repo for this bot.',
+    usage: 'github',
 };
